@@ -31,12 +31,17 @@ class Service {
     async function fetchAsync() {
       const raw = await fetch(url, requestOptions);
       const response = await raw.json();
+      
       if (response.success) {
-        callBackFunction(response.data);
+        if (callBackFunction != null) {
+          callBackFunction(response.data);
+        }
         errorHandler(null);
       }
       else {
-        callBackFunction([]);
+        if (callBackFunction != null) {
+          callBackFunction([]);
+        }
         errorHandler(response.error);
       }
     };
