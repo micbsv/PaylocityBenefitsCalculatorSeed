@@ -1,10 +1,23 @@
+using Api;
+using Api.PaycheckCalculator;
+using Api.Repository;
+using Api.Services;
+using Api.Validators;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Dependency Injection: Add services to the container
+builder.Services.AddScoped<IEmployeesService, EmployeesService>();
+builder.Services.AddScoped<IEmployeesRepository, EmployeesRepository>();
+builder.Services.AddScoped<IValidator, AddEmployeeValidator>();
+builder.Services.AddScoped<IPaycheckCalculator, PaycheckCalculator>();
+builder.Services.AddScoped<IPaycheckService, PaycheckService>();
+builder.Services.AddScoped<IDependentsService, DependentsService>();
+builder.Services.AddScoped<IDependentsRepository, DependentsRepository>();
 
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c => {
@@ -37,11 +50,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors(allowLocalhost);
-
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();
