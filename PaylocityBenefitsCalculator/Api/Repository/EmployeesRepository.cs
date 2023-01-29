@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Api.Repository
 {
+    // This class provides communication with the databse and outputs database entities
     public class EmployeesRepository : IEmployeesRepository
     {
         static EmployeesRepository()
