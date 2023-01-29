@@ -41,8 +41,13 @@ const EmployeeListing = () => {
         selectedEmployee.salary = currencyToNumber(selectedEmployee.salary);
         selectedEmployee.dateOfBirth = toDate(selectedEmployee.dateOfBirth);
 
-
         if (isAddingEmployee) {
+            for (let i = 0; i < selectedEmployee.dependents?.length; i++) {
+                let dpnd = selectedEmployee.dependents[i];
+                dpnd.dateOfBirth = toDate(dpnd.dateOfBirth);
+                dpnd.relationship = +dpnd.relationship;
+            }
+
             const url = `${baseUrl}/api/v1/Employees`;
             service.post(url, selectedEmployee, getEmployees, setError);
         } else {
@@ -99,6 +104,7 @@ const EmployeeListing = () => {
                 updateEmployee={setSelectedEmployee}
                 saveEmployee={saveEmployee}
                 isAddingEmployee={isAddingEmployee}
+                getEmployees={getEmployees}
             />
             <PaycheckModal
                 id={paycheckModalId} 
