@@ -1,3 +1,24 @@
+# Instructions: 
+
+## Run Server-side
+
+Open the solution file "PaylocityBenefitsCalculatorSeed\PaylocityBenefitsCalculator\PaylocityBenefitsCalculator.sln" in Visual Studio 2022.\
+In Test Explorer run unit tests from ApiTests project and make sure that all of them are green.\
+Run the Api project in the Debugger (IIS Express).\
+A Swagger "Employee Benefit Cost Calculation Api" page should show up in a browser - do not close the page!
+
+## Run Client-side
+
+In Command Promplt open project app folder: PaylocityBenefitsCalculatorSeed\app and run: \
+### `npm start`
+
+## Updating employee
+
+At this moment there is a limitation at the functionality of creating a new employee - the dependencies may be added only to existing employee, so first create an employee and then add / edit the employee’s dependents.\
+On Edit Employee dialog update the dependencies information and click "Update dependents" to save changes.\
+Click "Save employee" to update last name, first name and salary for the selected employee.
+
+
 # What is this?
 
 A project seed containing a React app ("app") with a C# dotnet API ("PaylocityBenefitsCalculator").  It is meant to get you started on the Paylocity Coding Challenge by taking some initial setup decisions away.
