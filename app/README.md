@@ -2,6 +2,12 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and uses Bootstrap.
 
+## Run Server-side
+
+Open the solution file "PaylocityBenefitsCalculatorSeed\PaylocityBenefitsCalculator\PaylocityBenefitsCalculator.sln" in Visual Studio 2022;
+In Test Explorer run unit tests to make sure all of them are green
+Run the Api project in the Debugger (IIS Express) - a Swagger "Employee Benefit Cost Calculation Api" page should show up in a browser
+
 ## Available Scripts
 
 In the project directory, you can run:

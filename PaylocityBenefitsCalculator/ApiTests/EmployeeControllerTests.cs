@@ -2,7 +2,7 @@
 using Api.Dtos.Dependent;
 using Api.Dtos.Employee;
 using Api.Models.Enums;
-using Api.PayCheckCalculator;
+using Api.PaycheckCalculator;
 using Api.Repository;
 using Api.Services;
 using Api.Validators;
@@ -20,7 +20,7 @@ namespace ApiTests
         public EmployeeControllerTests()
         {
             var employeesRepo = new EmployeesRepository();
-            var payCheckCalculator = new PayCheckCalculator();
+            var payCheckCalculator = new PaycheckCalculator();
             _employeesService = new EmployeesService(employeesRepo, payCheckCalculator);
 
             var addEmployeeValidator = new AddEmployeeValidator();
