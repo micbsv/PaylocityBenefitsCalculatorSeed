@@ -1,13 +1,13 @@
 ﻿using Api.Models;
 
-namespace Api.PayCheckCalculator.Deductions
+namespace Api.PaycheckCalculator.Deductions
 {
     public class PerDependentOver50Deduction : Deduction, IDeduction
     {
-        public string Name => "Dependents over 50 years old";
-        public string Description => "Dependents that are over 50 years old will incur an additional $200 per month";
+        public override string Name => "Dependents over 50 years old";
+        public override string Description => "Dependents that are over 50 years old will incur an additional $200 per month";
 
-        public decimal Calculate(Employee employee)
+        public decimal Calculate(Employee employee, int paychecksPerYear)
         {
             var dateLimit = DateTime.Today.AddYears(-50);
 

@@ -1,13 +1,13 @@
 ﻿using Api.Models;
 
-namespace Api.PayCheckCalculator.Deductions
+namespace Api.PaycheckCalculator.Deductions
 {
     public class SalaryOver80KDeduction : Deduction, IDeduction
     {
-        public string Name => "Salary over $80,000 per year";
-        public string Description => "Employees that make more than $80,000 per year will incur an additional 2% of their yearly salary in benefits costs";
+        public override string Name => "Salary over $80,000 per year";
+        public override string Description => "Employees that make more than $80,000 per year will incur an additional 2% of their yearly salary in benefits costs";
 
-        public decimal Calculate(Employee employee)
+        public decimal Calculate(Employee employee, int paychecksPerYear)
         {
             if (employee.Salary <= 80000)
                 return 0;

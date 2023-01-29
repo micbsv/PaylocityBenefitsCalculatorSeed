@@ -1,11 +1,9 @@
 ﻿using Api.Models;
 
-namespace Api.PayCheckCalculator.Deductions
+namespace Api.PaycheckCalculator.Deductions
 {
     public interface IDeduction
     {
-        public string Name { get; }
-        public string Description { get; }
-        decimal Calculate(Employee employee);
+        decimal Calculate(Employee employee, int paychecksPerYear);
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Api.Dtos.Employee;
 using Api.Models;
-using Api.PayCheckCalculator;
 using Api.Services;
 using Api.Validators;
 using Microsoft.AspNetCore.Mvc;
@@ -92,19 +91,6 @@ namespace Api.Controllers
 
             var result = new ApiResponse<GetEmployeeDto> {
                 Data = employee,
-                Success = true
-            };
-            return result;
-        }
-
-        [SwaggerOperation(Summary = "Calculate paycheck for employee id. Returns paycheck object")]
-        [HttpPut("{id}")]
-        public async Task<ActionResult<ApiResponse<PayCheck>>> CalculatePayCheck(int id)
-        {
-            PayCheck paycheck = await _employeesService.CalculatePayCheckAsync(id);
-
-            var result = new ApiResponse<PayCheck> {
-                Data = paycheck,
                 Success = true
             };
             return result;

@@ -1,10 +1,9 @@
 ﻿using Api.Models;
-using Api.PayCheckCalculator.Deductions;
 
-namespace Api.PayCheckCalculator
+namespace Api.PaycheckCalculator
 {
-    public interface IPayCheckCalculator
+    public interface IPaycheckCalculator
     {
-        PayCheck CalculateDeductions(Employee employee);
+        Paycheck CalculatePaycheck(Employee employee);
     }
 }

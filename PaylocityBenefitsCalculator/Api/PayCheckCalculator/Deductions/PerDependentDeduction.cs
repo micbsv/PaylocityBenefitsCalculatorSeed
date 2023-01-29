@@ -1,13 +1,13 @@
 ﻿using Api.Models;
 
-namespace Api.PayCheckCalculator.Deductions
+namespace Api.PaycheckCalculator.Deductions
 {
     public class PerDependentDeduction : Deduction, IDeduction
     {
-        public string Name => "Dependent benefits";
-        public string Description => "Each dependent represents an additional $600 cost per month (for benefits)";
+        public override string Name => "Dependent benefits";
+        public override string Description => "Each dependent represents an additional $600 cost per month (for benefits)";
 
-        public decimal Calculate(Employee employee)
+        public decimal Calculate(Employee employee, int paychecksPerYear)
         {
             var count = employee?.Dependents?.Count ?? 0;
             if (count == 0)

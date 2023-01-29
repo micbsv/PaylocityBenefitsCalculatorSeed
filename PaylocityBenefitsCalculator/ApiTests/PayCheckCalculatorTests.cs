@@ -1,13 +1,15 @@
 ﻿using Api.Models;
-using Api.PayCheckCalculator.Deductions;
+using Api.PaycheckCalculator;
+using Api.PaycheckCalculator.Deductions;
 using System;
-using System.Collections.Generic;
 using Xunit;
 
 namespace ApiTests
 {
-    public class PayCheckCalculatorTests
+    public class PaycheckCalculatorTests
     {
+        private int _paychecksPerYear = PaycheckCalculator.PaychecksPerYear;
+
         [Fact]
         public void BasicBenefits()
         {
@@ -16,7 +18,7 @@ namespace ApiTests
             };
 
             var deduction = new BasicBenefitsDeduction();
-            var cost = deduction.Calculate(employee);
+            var cost = deduction.Calculate(employee, _paychecksPerYear);
 
             Assert.Equal(461.54m, cost);
         }
@@ -32,7 +34,7 @@ namespace ApiTests
             };
 
             var deduction = new PerDependentDeduction();
-            var cost = deduction.Calculate(employee);
+            var cost = deduction.Calculate(employee, _paychecksPerYear);
 
             Assert.Equal(553.85m, cost);
         }
@@ -45,7 +47,7 @@ namespace ApiTests
             };
 
             var deduction = new SalaryOver80KDeduction();
-            var cost = deduction.Calculate(employee);
+            var cost = deduction.Calculate(employee, _paychecksPerYear);
 
             Assert.Equal(92.31m, cost);
         }
@@ -62,19 +64,20 @@ namespace ApiTests
                         DateOfBirth = DateTime.Parse("01/01/1970")
                     },
                     new Dependent {
+                        // Test case for today birth day
                         DateOfBirth = DateTime.Today.AddYears(-50)
                     }
                 }
             };
 
             var deduction = new PerDependentOver50Deduction();
-            var cost = deduction.Calculate(employee);
+            var cost = deduction.Calculate(employee, _paychecksPerYear);
 
             Assert.Equal(184.62m, cost);
         }
 
         [Fact]
-        public void CalculatePerPayCheck()
+        public void CalculateDeductions()
         {
             var employee = new Employee {
                 Salary = 120000m,
@@ -86,25 +89,18 @@ namespace ApiTests
                         DateOfBirth = DateTime.Parse("01/01/1970")
                     },
                     new Dependent {
+                        // Test case for today birth day
                         DateOfBirth = DateTime.Today.AddYears(-50)
                     }
                 }
             };
 
-            var deductions = new List<IDeduction> {
-                new BasicBenefitsDeduction(),
-                new PerDependentDeduction(),
-                new SalaryOver80KDeduction(),
-                new PerDependentOver50Deduction()
-            };
+            var _target = new PaycheckCalculator();
+            var paycheck = _target.CalculatePaycheck(employee);
 
-            var total = 0m;
-            foreach (var deduction in deductions)
-            {
-                total += deduction.Calculate(employee);
-            }
-
-            Assert.Equal(1569.24m, total);
+            Assert.Equal(4615.38m, paycheck.Gross);
+            Assert.Equal(1569.24m, paycheck.TotalDeductions);
+            Assert.Equal(3046.14m, paycheck.NetPay);
         }
     }
 }

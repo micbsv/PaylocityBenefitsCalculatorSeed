@@ -1,9 +1,7 @@
 ﻿using Api.Dtos.Employee;
 using Api.Mappers;
 using Api.Models;
-using Api.Models.Enums;
-using Api.PayCheckCalculator;
-using Api.PayCheckCalculator.Deductions;
+using Api.PaycheckCalculator;
 using Api.Repository;
 using System.Data;
 
@@ -13,12 +11,10 @@ namespace Api.Services
     public class EmployeesService : IEmployeesService
     {
         private readonly IEmployeesRepository _employeesRepo;
-        private readonly IPayCheckCalculator _payCheckCalculator;
 
-        public EmployeesService(IEmployeesRepository employeesRepo, IPayCheckCalculator payCheckCalculator)
+        public EmployeesService(IEmployeesRepository employeesRepo, IPaycheckCalculator payCheckCalculator)
         {
             _employeesRepo = employeesRepo;
-            _payCheckCalculator = payCheckCalculator;
         }
 
         public async Task<List<GetEmployeeDto>> GetAllAsync()
@@ -30,7 +26,7 @@ namespace Api.Services
             return list;
         }
 
-        public async Task<GetEmployeeDto> GetAsync(int employeeId)
+        public async Task<GetEmployeeDto?> GetAsync(int employeeId)
         {
             var employee = await GetEmployeeAsync(employeeId);
             if (employee == null)
@@ -80,23 +76,13 @@ namespace Api.Services
             return employeeDto;
         }
 
-        private async Task<Employee> GetEmployeeAsync(int employeeId)
+        private async Task<Employee?> GetEmployeeAsync(int employeeId)
         {
             if (employeeId <= 0)
                 throw new ArgumentOutOfRangeException(nameof(employeeId), $"employeeId: {employeeId}");
 
             var employee = await _employeesRepo.GetAsync(employeeId);
             return employee;
-        }
-
-        public async Task<PayCheck> CalculatePayCheckAsync(int employeeId)
-        {
-            var employee = await GetEmployeeAsync(employeeId);
-            if (employee == null)
-                throw new NoNullAllowedException($"There is no employee with id: {employeeId}");
-
-            var payCheck = _payCheckCalculator.CalculateDeductions(employee);
-            return payCheck;
         }
     }
 }

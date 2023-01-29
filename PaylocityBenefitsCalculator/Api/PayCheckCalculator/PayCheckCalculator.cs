@@ -1,12 +1,15 @@
 ﻿using Api.Models;
-using Api.PayCheckCalculator.Deductions;
+using Api.PaycheckCalculator.Deductions;
 
-namespace Api.PayCheckCalculator
+namespace Api.PaycheckCalculator
 {
-    public class PayCheckCalculator : IPayCheckCalculator
+    public class PaycheckCalculator : IPaycheckCalculator
     {
-        public PayCheck CalculateDeductions(Employee employee)
+        public static int PaychecksPerYear = 26;
+
+        public Paycheck CalculatePaycheck(Employee employee)
         {
+            // Use Command Pattern
             var deductions = new List<IDeduction> {
                 new BasicBenefitsDeduction(),
                 new PerDependentDeduction(),
@@ -14,16 +17,20 @@ namespace Api.PayCheckCalculator
                 new PerDependentOver50Deduction()
             };
 
-            var total = 0m;
+            var totalDeductions = 0m;
             foreach (var deduction in deductions)
             {
-                total += deduction.Calculate(employee);
+                totalDeductions += deduction.Calculate(employee, PaychecksPerYear);
             }
 
-            return new PayCheck {
-                Salary = employee.Salary,
-                Deductions = deductions,
-                TotalDeductions = total
+            var salary = Math.Round(employee.Salary / PaychecksPerYear, 2);
+            var netPaycheck = Math.Round(salary - totalDeductions, 2);
+
+            return new Paycheck {
+                Gross = salary,
+                Deductions = deductions.Cast<Deduction>().ToList(),
+                TotalDeductions = totalDeductions,
+                NetPay = netPaycheck
             };
         }
     }
