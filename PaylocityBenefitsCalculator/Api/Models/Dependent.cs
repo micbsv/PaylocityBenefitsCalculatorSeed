@@ -1,4 +1,6 @@
-﻿namespace Api.Models
+﻿using Api.Models.Enums;
+
+namespace Api.Models
 {
     public class Dependent
     {

@@ -1,7 +1,7 @@
-﻿using Api.Models;
+﻿using Api.Models.Enums;
 
 namespace Api.Dtos.Dependent
-{    
+{
     public class GetDependentDto
     {
         public int Id { get; set; }
