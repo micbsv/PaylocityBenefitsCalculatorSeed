@@ -3,7 +3,7 @@ export const baseUrl = 'https://localhost:7124';
 //ref: https://stackoverflow.com/a/55556258/725957
 export const currencyFormat = (num) => {
     if (num == '' || num == null || num == undefined) {
-        return '';
+        return '$0.00';
     }
 
     if (isNaN(num)) {

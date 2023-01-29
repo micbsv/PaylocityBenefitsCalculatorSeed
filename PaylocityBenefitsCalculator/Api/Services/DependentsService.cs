@@ -47,20 +47,20 @@ namespace Api.Services
             return dependentDto;
         }
 
-        public async Task<GetDependentDto> UpdateAsync(int dependentId, UpdateDependentDto updatedDependent)
+        public async Task<GetDependentDto> UpdateAsync(int dependentId, UpdateDependentDto dependent)
         {
-            var dependent = await GetDependentAsync(dependentId);
-            if (dependent == null)
+            var existing = await GetDependentAsync(dependentId);
+            if (existing == null)
                 throw new NoNullAllowedException($"There is no dependent with id: {dependentId}");
 
-            dependent.FirstName = updatedDependent.FirstName;
-            dependent.LastName = updatedDependent.LastName;
-            dependent.DateOfBirth = updatedDependent.DateOfBirth;
-            dependent.Relationship = updatedDependent.Relationship;
+            existing.FirstName = dependent.FirstName;
+            existing.LastName = dependent.LastName;
+            existing.DateOfBirth = dependent.DateOfBirth;
+            existing.Relationship = dependent.Relationship;
 
-            dependent = await _dependentsRepo.UpdateAsync(dependent);
+            existing = await _dependentsRepo.UpdateAsync(existing);
 
-            var dependentDto = ApiMapper.Map<Dependent, GetDependentDto>(dependent);
+            var dependentDto = ApiMapper.Map<Dependent, GetDependentDto>(existing);
             return dependentDto;
         }
 
