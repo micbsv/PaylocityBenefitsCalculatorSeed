@@ -9,7 +9,7 @@ namespace ApiTests
 {
     public class AddEmployeeValidatorTests
     {
-        IValidator _target;
+        IAddEmployeeValidator _target;
 
         public AddEmployeeValidatorTests()
         {

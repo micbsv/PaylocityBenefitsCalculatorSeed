@@ -1,10 +1,9 @@
-﻿using Api.Models.Enums;
-using Api.Models;
-using Api.Dtos.Employee;
+﻿using Api.Dtos.Employee;
+using Api.Models.Enums;
 
 namespace Api.Validators
 {
-    public class AddEmployeeValidator : IValidator
+    public class AddEmployeeValidator : IAddEmployeeValidator
     {
         public (bool isValid, string errorMessage) Validate(AddEmployeeDto employee)
         {

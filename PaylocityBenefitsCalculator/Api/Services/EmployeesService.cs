@@ -1,7 +1,6 @@
 ﻿using Api.Dtos.Employee;
 using Api.Mappers;
 using Api.Models;
-using Api.PaycheckCalculator;
 using Api.Repository;
 using System.Data;
 
@@ -12,7 +11,7 @@ namespace Api.Services
     {
         private readonly IEmployeesRepository _employeesRepo;
 
-        public EmployeesService(IEmployeesRepository employeesRepo, IPaycheckCalculator payCheckCalculator)
+        public EmployeesService(IEmployeesRepository employeesRepo)
         {
             _employeesRepo = employeesRepo;
         }

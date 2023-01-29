@@ -2,7 +2,7 @@
 
 namespace Api.Validators
 {
-    public interface IValidator
+    public interface IAddEmployeeValidator
     {
         (bool isValid, string errorMessage) Validate(AddEmployeeDto employee);
     }

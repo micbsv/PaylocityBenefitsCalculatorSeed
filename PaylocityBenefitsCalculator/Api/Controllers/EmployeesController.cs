@@ -12,9 +12,9 @@ namespace Api.Controllers
     public class EmployeesController : ControllerBase
     {
         private readonly IEmployeesService _employeesService;
-        private readonly IValidator _addEmployeeValidator;
+        private readonly IAddEmployeeValidator _addEmployeeValidator;
 
-        public EmployeesController(IEmployeesService employeesService, IValidator addEmployeeValidator)
+        public EmployeesController(IEmployeesService employeesService, IAddEmployeeValidator addEmployeeValidator)
         {
             _employeesService = employeesService;
             _addEmployeeValidator = addEmployeeValidator;

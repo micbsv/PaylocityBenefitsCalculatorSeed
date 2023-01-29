@@ -1,6 +1,7 @@
 ﻿using Api.Dtos.Dependent;
 using Api.Models;
 using Api.Services;
+using Api.Validators;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -11,10 +12,15 @@ namespace Api.Controllers
     public class DependentsController : ControllerBase
     {
         private readonly IDependentsService _dependentsService;
+        private readonly IAddDependentValidator _addDependentValidator;
+        private readonly IUpdateDependentValidator _updateDependentValidator;
 
-        public DependentsController(IDependentsService dependentsService)
+        public DependentsController(IDependentsService dependentsService, IAddDependentValidator addDependentValidator, 
+            IUpdateDependentValidator updateDependentValidator)
         {
             _dependentsService = dependentsService;
+            _addDependentValidator = addDependentValidator;
+            _updateDependentValidator = updateDependentValidator;
         }
 
         [SwaggerOperation(Summary = "Get dependent by id")]
@@ -47,6 +53,18 @@ namespace Api.Controllers
         [HttpPost]
         public async Task<ActionResult<ApiResponse<GetDependentDto>>> AddDependent(AddDependentWithEmployeeIdDto newDependent)
         {
+            var ret = await _addDependentValidator.ValidateAsync(newDependent);
+            if (!ret.isValid)
+            {
+                var errorResult = new ApiResponse<GetDependentDto>
+                {
+                    Data = null,
+                    Success = false,
+                    Error = ret.errorMessage
+                };
+                return errorResult;
+            }
+
             var dependent = await _dependentsService.AddAsync(newDependent);
 
             var result = new ApiResponse<GetDependentDto> {
@@ -60,6 +78,18 @@ namespace Api.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<ApiResponse<GetDependentDto>>> UpdateDependent(int id, UpdateDependentDto updatedDependent)
         {
+            var ret = await _updateDependentValidator.ValidateAsync(id, updatedDependent);
+            if (!ret.isValid)
+            {
+                var errorResult = new ApiResponse<GetDependentDto>
+                {
+                    Data = null,
+                    Success = false,
+                    Error = ret.errorMessage
+                };
+                return errorResult;
+            }
+
             GetDependentDto dependent = await _dependentsService.UpdateAsync(id, updatedDependent);
 
             var result = new ApiResponse<GetDependentDto> {

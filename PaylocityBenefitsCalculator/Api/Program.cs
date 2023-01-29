@@ -1,4 +1,3 @@
-using Api;
 using Api.PaycheckCalculator;
 using Api.Repository;
 using Api.Services;
@@ -10,11 +9,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Dependency Injection: Add services to the container
 builder.Services.AddScoped<IEmployeesService, EmployeesService>();
 builder.Services.AddScoped<IEmployeesRepository, EmployeesRepository>();
-builder.Services.AddScoped<IValidator, AddEmployeeValidator>();
+builder.Services.AddScoped<IAddEmployeeValidator, AddEmployeeValidator>();
 builder.Services.AddScoped<IPaycheckCalculator, PaycheckCalculator>();
 builder.Services.AddScoped<IPaycheckService, PaycheckService>();
 builder.Services.AddScoped<IDependentsService, DependentsService>();
 builder.Services.AddScoped<IDependentsRepository, DependentsRepository>();
+builder.Services.AddScoped<IAddDependentValidator, AddDependentValidator>();
+builder.Services.AddScoped<IUpdateDependentValidator, UpdateDependentValidator>();
 
 builder.Services.AddControllers();
 
