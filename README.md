@@ -2,7 +2,7 @@
 
 ## Run Server-side
 
-* in Visual Studio 2022 open the solution file "PaylocityBenefitsCalculatorSeed\PaylocityBenefitsCalculator\PaylocityBenefitsCalculator.sln"
+* In Visual Studio 2022 open the solution file: "PaylocityBenefitsCalculatorSeed\PaylocityBenefitsCalculator\PaylocityBenefitsCalculator.sln"
 * In Test Explorer run unit tests from ApiTests project and make sure that all of them are green
 * Run the Api project in the Debugger (IIS Express)
 
