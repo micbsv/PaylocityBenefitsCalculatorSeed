@@ -2,15 +2,15 @@
 
 ## Run Server-side
 
-* Open the solution file "PaylocityBenefitsCalculatorSeed\PaylocityBenefitsCalculator\PaylocityBenefitsCalculator.sln" in Visual Studio 2022.
-* In Test Explorer run unit tests from ApiTests project and make sure that all of them are green.
-* Run the Api project in the Debugger (IIS Express).
+* in Visual Studio 2022 open the solution file "PaylocityBenefitsCalculatorSeed\PaylocityBenefitsCalculator\PaylocityBenefitsCalculator.sln"
+* In Test Explorer run unit tests from ApiTests project and make sure that all of them are green
+* Run the Api project in the Debugger (IIS Express)
 
-A Swagger "Employee Benefit Cost Calculation Api" page should show up in a browser - do not close the page!
+A Swagger "Employee Benefit Cost Calculation Api" page should show up in a browser - leave page open.
 
 ## Run Client-side
 
-In Command Promplt open project app folder: PaylocityBenefitsCalculatorSeed\app and run:
+In Command Promplt open project app folder: "PaylocityBenefitsCalculatorSeed\app" and run:
 ### `npm start`
 
 ## Updating employee
